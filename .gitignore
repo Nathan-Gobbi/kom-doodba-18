@@ -29,3 +29,8 @@
 
 # Project-specific docker configurations
 /.docker/
+odoo/custom/ssh/id_rsa
+odoo/custom/ssh/id_rsa.pub
+odoo/custom/ssh/*
+!odoo/custom/ssh/config
+!odoo/custom/ssh/known_hosts
