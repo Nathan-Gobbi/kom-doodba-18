@@ -1,0 +1,28 @@
+{
+    'name': 'Bike Shop',
+    'version': '18.0.1.0.0',
+    'category': 'Sales',
+    'summary': 'Bike shop management system with service orders, products, and financial consolidation',
+    'author': 'Bike Shop Team',
+    'website': 'https://github.com/kom-doodba-18',
+    'license': 'LGPL-3',
+    'depends': [
+        'base',
+        'sale',
+        'stock',
+    ],
+    'data': [
+        'security/ir.model.access.csv',
+        'data/bike_shop_sequence.xml',
+        'report/bike_shop_order_report.xml',
+        'views/bike_shop_product_views.xml',
+        'views/bike_shop_service_views.xml',
+        'views/bike_shop_order_views.xml',
+        'views/bike_shop_closing_views.xml',
+        'report/bike_shop_order_template.xml',
+        'views/bike_shop_menus.xml',
+    ],
+    'installable': True,
+    'auto_install': False,
+    'application': True,
+}

@@ -1,0 +1,11 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_bike_shop_product_user,bike_shop.product.user,model_bike_shop_product,base.group_user,1,1,1,1
+access_bike_shop_product_manager,bike_shop.product.manager,model_bike_shop_product,base.group_system,1,1,1,1
+access_bike_shop_service_user,bike_shop.service.user,model_bike_shop_service,base.group_user,1,1,1,1
+access_bike_shop_service_manager,bike_shop.service.manager,model_bike_shop_service,base.group_system,1,1,1,1
+access_bike_shop_order_user,bike_shop.order.user,model_bike_shop_order,base.group_user,1,1,1,0
+access_bike_shop_order_manager,bike_shop.order.manager,model_bike_shop_order,base.group_system,1,1,1,1
+access_bike_shop_order_line_user,bike_shop.order.line.user,model_bike_shop_order_line,base.group_user,1,1,1,1
+access_bike_shop_order_line_manager,bike_shop.order.line.manager,model_bike_shop_order_line,base.group_system,1,1,1,1
+access_bike_shop_closing_user,bike_shop.closing.user,model_bike_shop_closing,base.group_user,1,0,0,0
+access_bike_shop_closing_manager,bike_shop.closing.manager,model_bike_shop_closing,base.group_system,1,1,1,1

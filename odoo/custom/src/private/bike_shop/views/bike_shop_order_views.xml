@@ -1,0 +1,203 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_bike_shop_order_line_form" model="ir.ui.view">
+        <field name="name">bike.shop.order.line.form</field>
+        <field name="model">bike_shop.order.line</field>
+        <field name="arch" type="xml">
+            <form string="Order Line">
+                <sheet>
+                    <field name="currency_id" invisible="1"/>
+                    <group>
+                        <group>
+                            <field name="line_type"/>
+                            <field name="product_id" invisible="line_type != 'product'"/>
+                            <field name="service_id" invisible="line_type != 'service'"/>
+                        </group>
+                        <group>
+                            <field name="quantity"/>
+                            <field name="unit_price"/>
+                            <field name="cost_unit_price"/>
+                        </group>
+                    </group>
+                    <group>
+                        <field name="description" nolabel="1"/>
+                    </group>
+                    <group>
+                        <group>
+                            <field name="subtotal" readonly="1"/>
+                        </group>
+                        <group>
+                            <field name="cost_subtotal" readonly="1"/>
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_bike_shop_order_line_list" model="ir.ui.view">
+        <field name="name">bike.shop.order.line.list</field>
+        <field name="model">bike_shop.order.line</field>
+        <field name="arch" type="xml">
+            <list editable="bottom">
+                <field name="sequence" widget="handle"/>
+                <field name="line_type"/>
+                <field name="product_id" invisible="line_type != 'product'"/>
+                <field name="service_id" invisible="line_type != 'service'"/>
+                <field name="description"/>
+                <field name="quantity"/>
+                <field name="unit_price"/>
+                <field name="cost_unit_price"/>
+                <field name="subtotal" sum="Total"/>
+                <field name="cost_subtotal" sum="Cost Total"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="view_bike_shop_order_list" model="ir.ui.view">
+        <field name="name">bike.shop.order.list</field>
+        <field name="model">bike_shop.order</field>
+        <field name="arch" type="xml">
+            <list>
+                <field name="name"/>
+                <field name="order_date"/>
+                <field name="partner_id"/>
+                <field name="status"/>
+                <field name="total"/>
+                <field name="net_value"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="view_bike_shop_order_form" model="ir.ui.view">
+        <field name="name">bike.shop.order.form</field>
+        <field name="model">bike_shop.order</field>
+        <field name="arch" type="xml">
+            <form string="Service Order">
+                <header>
+                    <button name="action_complete" string="Complete Order" type="object" class="oe_highlight" invisible="status != 'open'"/>
+                    <button name="action_reopen" string="Reopen Order" type="object" invisible="status != 'completed'"/>
+                    <field name="status" widget="statusbar" statusbar_visible="open,completed"/>
+                </header>
+                <sheet>
+                    <field name="company_id" invisible="1"/>
+                    <field name="currency_id" invisible="1"/>
+                    <widget name="web_ribbon" title="Completed" bg_color="text-bg-success" invisible="status != 'completed'"/>
+                    <div class="oe_title">
+                        <h1>
+                            <field name="name" readonly="1"/>
+                        </h1>
+                    </div>
+
+                    <group string="Order Information">
+                        <group>
+                            <field name="partner_id" readonly="status == 'completed'"/>
+                            <field name="order_date" readonly="1"/>
+                        </group>
+                        <group>
+                            <field name="discount_percentage" readonly="status == 'completed'"/>
+                        </group>
+                    </group>
+
+                    <group string="Customer Details">
+                        <group>
+                            <field name="partner_name" readonly="1"/>
+                            <field name="partner_phone" readonly="1"/>
+                            <field name="partner_mobile" readonly="1"/>
+                        </group>
+                        <group>
+                            <field name="partner_email" readonly="1"/>
+                            <field name="partner_city" readonly="1"/>
+                            <field name="partner_state_id" readonly="1"/>
+                            <field name="partner_zip" readonly="1"/>
+                        </group>
+                    </group>
+
+                    <group>
+                        <field name="partner_street" readonly="1"/>
+                        <field name="partner_street2" readonly="1"/>
+                    </group>
+
+                    <group string="Order Items">
+                        <field name="order_line_ids" nolabel="1" readonly="status == 'completed'">
+                            <list editable="bottom">
+                                <field name="sequence" widget="handle"/>
+                                <field name="line_type"/>
+                                <field name="product_id" invisible="line_type != 'product'"/>
+                                <field name="service_id" invisible="line_type != 'service'"/>
+                                <field name="description"/>
+                                <field name="quantity"/>
+                                <field name="unit_price"/>
+                                <field name="cost_unit_price"/>
+                                <field name="subtotal" sum="Subtotal"/>
+                                <field name="cost_subtotal" sum="Cost"/>
+                            </list>
+                            <form string="Order Line">
+                                <sheet>
+                                    <field name="currency_id" invisible="1"/>
+                                    <group>
+                                        <group>
+                                            <field name="line_type"/>
+                                            <field name="product_id" invisible="line_type != 'product'"/>
+                                            <field name="service_id" invisible="line_type != 'service'"/>
+                                        </group>
+                                        <group>
+                                            <field name="quantity"/>
+                                            <field name="unit_price"/>
+                                            <field name="cost_unit_price"/>
+                                        </group>
+                                    </group>
+                                    <field name="description" nolabel="1"/>
+                                    <group>
+                                        <group>
+                                            <field name="subtotal" readonly="1"/>
+                                        </group>
+                                        <group>
+                                            <field name="cost_subtotal" readonly="1"/>
+                                        </group>
+                                    </group>
+                                </sheet>
+                            </form>
+                        </field>
+                    </group>
+
+                    <group string="Totals">
+                        <group>
+                            <field name="subtotal" readonly="1"/>
+                            <field name="discount_value" readonly="1"/>
+                            <field name="total" readonly="1"/>
+                        </group>
+                        <group>
+                            <field name="cost_total" readonly="1"/>
+                            <field name="net_value" readonly="1"/>
+                        </group>
+                    </group>
+
+                    <group string="Notes">
+                        <field name="notes" nolabel="1" placeholder="Additional notes..." readonly="status == 'completed'"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_bike_shop_order_search" model="ir.ui.view">
+        <field name="name">bike.shop.order.search</field>
+        <field name="model">bike_shop.order</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="name" string="Order Number"/>
+                <field name="partner_id" string="Customer"/>
+                <separator/>
+                <filter name="status_open" string="Open" domain="[('status', '=', 'open')]"/>
+                <filter name="status_completed" string="Completed" domain="[('status', '=', 'completed')]"/>
+                <separator/>
+                <group expand="0" string="Group By">
+                    <filter name="group_by_status" string="Status" context="{'group_by': 'status'}"/>
+                    <filter name="group_by_partner" string="Customer" context="{'group_by': 'partner_id'}"/>
+                    <filter name="group_by_date" string="Date" context="{'group_by': 'order_date'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+</odoo>

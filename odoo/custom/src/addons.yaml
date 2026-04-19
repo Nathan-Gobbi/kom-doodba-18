@@ -1,0 +1,6 @@
+# Addons list for Doodba
+# Format: ./LOCAL_PATH: [ADDON1, ADDON2, ...]
+
+# Private addons (custom modules)
+./private:
+  - bike_shop
